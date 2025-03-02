@@ -8,23 +8,19 @@ public class ProductBasket {
 
     private final Product[] productBasket;
 
-    private int size;
+    private int quantityProductsInBasket;
 
 
-    public ProductBasket(Product[] productBasket) {
+    public ProductBasket() {
         this.productBasket = new Product[5];
     }
 
 
     public void addProdukt(Product product) {
-        for (int i = 0; i < productBasket.length; i++) {
-            if (productBasket[i] != null) {
-                i++;
-            } else if (productBasket[productBasket.length] != null) {
-                throw new ProductBasketIsFullExeption();
-            }
-            productBasket[i] = product;
+        if (quantityProductsInBasket >= productBasket.length) {
+            throw new ProductBasketIsFullExeption();
         }
+        productBasket[quantityProductsInBasket++] = product;
     }
 
     public int summingBasketPrice() {
@@ -36,8 +32,9 @@ public class ProductBasket {
     }
 
     public void printAllProductsInBasket() {
-        if (!chekBasketForNull()) {
+        if (chekBasketForNull()) {
             System.out.println("«В корзине пусто»");
+            return;
         }
 
         for (int i = 0; i < productBasket.length; i++) {
