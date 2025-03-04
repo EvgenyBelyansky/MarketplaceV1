@@ -25,32 +25,25 @@ public class ProductBasket {
 
     public int summingBasketPrice() {
         int sum = 0;
-        for (int i = 0; i < productBasket.length; i++) {
-            sum = productBasket[i].getPrice() + sum;
+        for (int i = 0; i < quantityProductsInBasket; i++) {
+            sum += productBasket[i].getPrice();
         }
         return sum;
     }
 
     public void printAllProductsInBasket() {
-        if (chekBasketForNull()) {
+        if (quantityProductsInBasket == 0) {
             System.out.println("«В корзине пусто»");
             return;
         }
 
-        for (int i = 0; i < productBasket.length; i++) {
+        for (int i = 0; i < quantityProductsInBasket; i++) {
             System.out.printf("<%s>: <%s>%n",
                     productBasket[i].getProductName(), productBasket[i].getPrice());
         }
         System.out.printf("\nИтого: <%s>%n", summingBasketPrice());
     }
 
-    public boolean chekBasketForNull() {
-        for (int i = 0; i < productBasket.length; i++) {
-            if (productBasket[i] != null)
-                return false;
-        }
-        return true;
-    }
 
     public void clearBasket() {
         Arrays.fill(productBasket, null);
