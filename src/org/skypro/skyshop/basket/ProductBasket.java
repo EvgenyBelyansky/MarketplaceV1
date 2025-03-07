@@ -15,10 +15,9 @@ public class ProductBasket {
         this.productBasket = new Product[5];
     }
 
-
     public void addProdukt(Product product) {
         if (quantityProductsInBasket >= productBasket.length) {
-            throw new ProductBasketIsFullExeption();
+            throw new ProductBasketIsFullExeption(product);
         }
         productBasket[quantityProductsInBasket++] = product;
     }
@@ -43,7 +42,6 @@ public class ProductBasket {
         }
         System.out.printf("\nИтого: <%s>%n", summingBasketPrice());
     }
-
 
     public void clearBasket() {
         Arrays.fill(productBasket, null);
