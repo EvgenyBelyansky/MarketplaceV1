@@ -47,11 +47,15 @@ public class ProductBasket {
 
     public void clearBasket() {
         Arrays.fill(productBasket, null);
+        quantityProductsInBasket = 0;
     }
 
     public boolean findProductForName(String productName) {
         for (Product product : productBasket) {
-            if (product.getProductName().equals(productName)) {
+            if (quantityProductsInBasket == 0) {
+                System.out.println("«В корзине пусто»");
+                break;
+            } else if (product.getProductName().equals(productName)) {
                 return true;
             }
         }
