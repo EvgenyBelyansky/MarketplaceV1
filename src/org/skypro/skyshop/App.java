@@ -34,10 +34,13 @@ public class App {
         System.out.println("\n<<Распечатка всех товаров в корзине>>");
         productBasketN1.printAllProductsInBasket();
 
-        //Поиск продукта в корзине по названию
-        System.out.println("\n<<Поиск продукта в корзине по названию>>");
-        System.out.println(productBasketN1.findProductForName("Батон"));
+        //Поиск по названию, продукта, который есть в корзине
+        System.out.println("\n<<Поиск по названию, продукта, который есть в корзине>>");
         System.out.println(productBasketN1.findProductForName("Яблоко"));
+
+        //Поиск по названию, продукта, которого нет в корзине
+        System.out.println("\n<<Поиск по названию, продукта, которого нет в корзине>>");
+        System.out.println(productBasketN1.findProductForName("Батон"));
 
         //Очистка корзины
         System.out.println("\n<<Очистка корзины>>");
@@ -54,5 +57,29 @@ public class App {
         //Поиск продукта в пустой корзине по названию
         System.out.println("\n<<Поиск продукта в пустой корзине по названию>>");
         System.out.println(productBasketN1.findProductForName("Яблоко"));
+
+        //Добавление товара в заполненную корзину
+        System.out.println("\n<<Добавление товара в заполненную корзину>>");
+        productBasketN1.addProdukt(
+                new Product("Яблоко", 50)
+        );
+        productBasketN1.addProdukt(
+                new Product("Хлеб", 25)
+        );
+        productBasketN1.addProdukt(
+                new Product("Молоко", 120)
+        );
+        productBasketN1.addProdukt(
+                new Product("Колбаса", 250)
+        );
+        productBasketN1.addProdukt(
+                new Product("Леденец", 13)
+        );
+        productBasketN1.addProdukt(
+                new Product("Леденец2", 13)
+        );
+
+
+
     }
 }
