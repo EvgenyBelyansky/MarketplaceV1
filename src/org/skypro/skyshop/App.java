@@ -7,7 +7,6 @@ import org.skypro.skyshop.product.Product;
 public class App {
     public static void main(String[] args) {
 
-
         ProductBasket productBasketN1 = new ProductBasket();
 
         productBasketN1.addProdukt(
@@ -78,8 +77,5 @@ public class App {
         productBasketN1.addProdukt(
                 new Product("Леденец2", 13)
         );
-
-
-
     }
 }
