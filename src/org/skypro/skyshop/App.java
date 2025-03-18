@@ -4,6 +4,7 @@ import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.specialProducts.DiscountedProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
+import org.skypro.skyshop.product.specialProducts.FixPriceProduct;
 
 
 public class App {
@@ -59,13 +60,13 @@ public class App {
         System.out.println("\n<<Поиск продукта в пустой корзине по названию>>");
         System.out.println(productBasketN1.findProductForName("Яблоко"));
 
-        //Добавление товара в заполненную корзину
-        System.out.println("\n<<Добавление товара в заполненную корзину>>");
+        //Добавление товаров разных типов в корзину
+        System.out.println("\n<<Добавление товаров разных типов в корзину>>");
         productBasketN1.addProdukt(
-                new SimpleProduct("Яблоко", 50)
+                new FixPriceProduct("Яблоко")
         );
         productBasketN1.addProdukt(
-                new SimpleProduct("Хлеб", 25)
+                new DiscountedProduct("Хлеб", 25, 50)
         );
         productBasketN1.addProdukt(
                 new SimpleProduct("Молоко", 120)
@@ -74,10 +75,12 @@ public class App {
                 new SimpleProduct("Колбаса", 250)
         );
         productBasketN1.addProdukt(
-                new SimpleProduct("Леденец", 13)
+                new DiscountedProduct("Леденец", 13, 35)
         );
 
-        Product d1 = new DiscountedProduct("Apple", -50, 100);
-        System.out.println(d1.getPrice());
+        //Распечатка товаров в корзине
+        System.out.println("\n<<Распечатка всех товаров в корзине>>");
+        productBasketN1.printAllProductsInBasket();
+
     }
 }

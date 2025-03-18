@@ -30,4 +30,9 @@ public class SimpleProduct extends Product {
         return Objects.hash(super.hashCode(), price);
     }
 
+    @Override
+    public boolean isSpecial() {
+        return false;
+    }
+
 }

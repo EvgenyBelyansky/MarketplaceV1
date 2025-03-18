@@ -34,4 +34,7 @@ public abstract class Product {
     public String toString() {
         return String.format("<%s>: <%s>", productName, getPrice());
     }
+
+    public abstract boolean isSpecial();
+
 }
