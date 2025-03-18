@@ -1,7 +1,10 @@
 package org.skypro.skyshop;
 
 import org.skypro.skyshop.basket.ProductBasket;
+import org.skypro.skyshop.product.specialProducts.DiscountedProduct;
 import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.product.SimpleProduct;
+import org.skypro.skyshop.product.specialProducts.FixPriceProduct;
 
 
 public class App {
@@ -10,19 +13,19 @@ public class App {
         ProductBasket productBasketN1 = new ProductBasket();
 
         productBasketN1.addProdukt(
-                new Product("Яблоко", 50)
+                new SimpleProduct("Яблоко", 50)
         );
         productBasketN1.addProdukt(
-                new Product("Хлеб", 25)
+                new SimpleProduct("Хлеб", 25)
         );
         productBasketN1.addProdukt(
-                new Product("Молоко", 120)
+                new SimpleProduct("Молоко", 120)
         );
         productBasketN1.addProdukt(
-                new Product("Колбаса", 250)
+                new SimpleProduct("Колбаса", 250)
         );
         productBasketN1.addProdukt(
-                new Product("Леденец", 13)
+                new SimpleProduct("Леденец", 13)
         );
 
         //Вычисление стоимости товаров в корзине
@@ -57,25 +60,27 @@ public class App {
         System.out.println("\n<<Поиск продукта в пустой корзине по названию>>");
         System.out.println(productBasketN1.findProductForName("Яблоко"));
 
-        //Добавление товара в заполненную корзину
-        System.out.println("\n<<Добавление товара в заполненную корзину>>");
+        //Добавление товаров разных типов в корзину
+        System.out.println("\n<<Добавление товаров разных типов в корзину>>");
         productBasketN1.addProdukt(
-                new Product("Яблоко", 50)
+                new FixPriceProduct("Яблоко")
         );
         productBasketN1.addProdukt(
-                new Product("Хлеб", 25)
+                new DiscountedProduct("Хлеб", 25, 50)
         );
         productBasketN1.addProdukt(
-                new Product("Молоко", 120)
+                new SimpleProduct("Молоко", 120)
         );
         productBasketN1.addProdukt(
-                new Product("Колбаса", 250)
+                new SimpleProduct("Колбаса", 250)
         );
         productBasketN1.addProdukt(
-                new Product("Леденец", 13)
+                new DiscountedProduct("Леденец", 13, 35)
         );
-        productBasketN1.addProdukt(
-                new Product("Леденец2", 13)
-        );
+
+        //Распечатка товаров в корзине
+        System.out.println("\n<<Распечатка всех товаров в корзине>>");
+        productBasketN1.printAllProductsInBasket();
+
     }
 }
