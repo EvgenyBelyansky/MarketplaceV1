@@ -1,7 +1,9 @@
 package org.skypro.skyshop;
 
 import org.skypro.skyshop.basket.ProductBasket;
+import org.skypro.skyshop.product.specialProducts.DiscountedProduct;
 import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.product.SimpleProduct;
 
 
 public class App {
@@ -10,19 +12,19 @@ public class App {
         ProductBasket productBasketN1 = new ProductBasket();
 
         productBasketN1.addProdukt(
-                new Product("Яблоко", 50)
+                new SimpleProduct("Яблоко", 50)
         );
         productBasketN1.addProdukt(
-                new Product("Хлеб", 25)
+                new SimpleProduct("Хлеб", 25)
         );
         productBasketN1.addProdukt(
-                new Product("Молоко", 120)
+                new SimpleProduct("Молоко", 120)
         );
         productBasketN1.addProdukt(
-                new Product("Колбаса", 250)
+                new SimpleProduct("Колбаса", 250)
         );
         productBasketN1.addProdukt(
-                new Product("Леденец", 13)
+                new SimpleProduct("Леденец", 13)
         );
 
         //Вычисление стоимости товаров в корзине
@@ -60,22 +62,22 @@ public class App {
         //Добавление товара в заполненную корзину
         System.out.println("\n<<Добавление товара в заполненную корзину>>");
         productBasketN1.addProdukt(
-                new Product("Яблоко", 50)
+                new SimpleProduct("Яблоко", 50)
         );
         productBasketN1.addProdukt(
-                new Product("Хлеб", 25)
+                new SimpleProduct("Хлеб", 25)
         );
         productBasketN1.addProdukt(
-                new Product("Молоко", 120)
+                new SimpleProduct("Молоко", 120)
         );
         productBasketN1.addProdukt(
-                new Product("Колбаса", 250)
+                new SimpleProduct("Колбаса", 250)
         );
         productBasketN1.addProdukt(
-                new Product("Леденец", 13)
+                new SimpleProduct("Леденец", 13)
         );
-        productBasketN1.addProdukt(
-                new Product("Леденец2", 13)
-        );
+
+        Product d1 = new DiscountedProduct("Apple", -50, 100);
+        System.out.println(d1.getPrice());
     }
 }
