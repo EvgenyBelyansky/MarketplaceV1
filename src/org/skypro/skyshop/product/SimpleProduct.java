@@ -1,5 +1,7 @@
 package org.skypro.skyshop.product;
 
+import org.skypro.skyshop.productService.Searchable;
+
 import java.util.Objects;
 
 public class SimpleProduct extends Product {
@@ -34,5 +36,6 @@ public class SimpleProduct extends Product {
     public boolean isSpecial() {
         return false;
     }
+
 
 }

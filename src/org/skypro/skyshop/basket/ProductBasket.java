@@ -43,7 +43,7 @@ public class ProductBasket {
         System.out.printf("\nИтого: <%s>%n", summingBasketPrice());
         System.out.printf("Специальных товаров: <%s>%n",
                 Arrays.stream(productBasket)
-                        .filter(product -> product.isSpecial())
+                        .filter(Product::isSpecial)
                         .count());
     }
 
