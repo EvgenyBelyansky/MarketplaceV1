@@ -1,44 +1,56 @@
 package org.skypro.skyshop.product;
 
+import org.skypro.skyshop.article.Article;
+import org.skypro.skyshop.product.productService.Searchable;
+
 import java.util.Objects;
 
-public class Product {
+public abstract class Product implements Searchable {
 
     private final String productName;
+    
+    private final Article article;
 
-    private final int price;
 
-    public Product(String productName, int price) {
+    public Product(String productName, Article article) {
         this.productName = productName;
-        this.price = price;
+        this.article = article;
     }
 
     public String getProductName() {
         return productName;
     }
 
-    public int getPrice() {
-        return price;
-    }
+    public abstract double getPrice();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return price == product.price && Objects.equals(productName, product.productName);
+        return Objects.equals(productName, product.productName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productName, price);
+        return Objects.hash(productName);
     }
 
     @Override
     public String toString() {
-        return "Product{" +
-                "productName='" + productName + '\'' +
-                ", price=" + price +
-                '}';
+        return String.format("<%s>: <%s>", productName, getPrice());
     }
+
+    public abstract boolean isSpecial();
+
+    @Override
+    public String searchTerm() {
+        return productName;
+    }
+
+    @Override
+    public String getTypeContent() {
+        return "PRODUCT";
+    }
+
 }

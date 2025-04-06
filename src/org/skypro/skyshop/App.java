@@ -1,7 +1,14 @@
 package org.skypro.skyshop;
 
+import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.product.specialProducts.DiscountedProduct;
+import org.skypro.skyshop.product.SimpleProduct;
+import org.skypro.skyshop.product.specialProducts.FixPriceProduct;
+import org.skypro.skyshop.product.productService.SearchEngine;
+
+import java.util.Arrays;
 
 
 public class App {
@@ -9,73 +16,72 @@ public class App {
 
         ProductBasket productBasketN1 = new ProductBasket();
 
-        productBasketN1.addProdukt(
-                new Product("Яблоко", 50)
+
+        Article appleArticle = new Article(
+                "О Яблоке", "Оно зеленое или красное, кислое или сладкое"
         );
-        productBasketN1.addProdukt(
-                new Product("Хлеб", 25)
+        Article breadArticle = new Article(
+                "Что-то про Хлеб", "Бывает черрный и белый"
         );
-        productBasketN1.addProdukt(
-                new Product("Молоко", 120)
+        Article milkArticle = new Article(
+                "Про молоко", "Жидкое и белое......."
         );
-        productBasketN1.addProdukt(
-                new Product("Колбаса", 250)
+        Article sausageArticle = new Article(
+                "Про Колбасу", "Из мяса, возможно"
         );
-        productBasketN1.addProdukt(
-                new Product("Леденец", 13)
+        Article lollipopArticle = new Article(
+                "Про Леденец", "На палке и нет"
         );
 
-        //Вычисление стоимости товаров в корзине
-        System.out.println("\n<<Вычисление стоимости товаров в корзине>>");
-        System.out.println("Сумма товаров в корзине = " + productBasketN1.summingBasketPrice());
 
-        //Распечатка всех товаров в корзине
+        Product apple = new FixPriceProduct(
+                "Яблоко",
+                appleArticle
+        );
+        Product bread = new DiscountedProduct(
+                "Хлеб", 25, 50,
+                breadArticle
+        );
+        Product milk = new SimpleProduct(
+                "Молоко", 120,
+                milkArticle
+        );
+        Product sausage = new SimpleProduct(
+                "Колбаса", 250,
+                sausageArticle
+        );
+        Product lollipop = new DiscountedProduct(
+                "Леденец", 13, 35,
+                lollipopArticle
+        );
+
+
+        //Добавление товаров разных типов в корзину
+        System.out.println("\n<<Добавление товаров разных типов в корзину>>");
+        productBasketN1.addProdukt(apple);
+        productBasketN1.addProdukt(bread);
+        productBasketN1.addProdukt(milk);
+        productBasketN1.addProdukt(sausage);
+        productBasketN1.addProdukt(lollipop);
+
+        //Распечатка товаров в корзине
         System.out.println("\n<<Распечатка всех товаров в корзине>>");
         productBasketN1.printAllProductsInBasket();
 
-        //Поиск по названию, продукта, который есть в корзине
-        System.out.println("\n<<Поиск по названию, продукта, который есть в корзине>>");
-        System.out.println(productBasketN1.findProductForName("Яблоко"));
 
-        //Поиск по названию, продукта, которого нет в корзине
-        System.out.println("\n<<Поиск по названию, продукта, которого нет в корзине>>");
-        System.out.println(productBasketN1.findProductForName("Батон"));
+        SearchEngine newSearch = new SearchEngine(10);
+        newSearch.add(apple);
+        newSearch.add(appleArticle);
+        newSearch.add(milk);
+        newSearch.add(sausage);
+        newSearch.add(lollipop);
+        newSearch.add(sausageArticle);
+        newSearch.add(milkArticle);
+        newSearch.add(breadArticle);
+        newSearch.add(lollipopArticle);
 
-        //Очистка корзины
-        System.out.println("\n<<Очистка корзины>>");
-        productBasketN1.clearBasket();
+        System.out.println(Arrays.toString(newSearch.search("Леде")));
 
-        //Распечатка пустой корзины
-        System.out.println("\n<<Распечатка пустой корзины>>");
-        productBasketN1.printAllProductsInBasket();
 
-        //Вычисление суммы пустой корзины
-        System.out.println("\n<<Вычисление суммы пустой корзины>>");
-        System.out.println(productBasketN1.summingBasketPrice());
-
-        //Поиск продукта в пустой корзине по названию
-        System.out.println("\n<<Поиск продукта в пустой корзине по названию>>");
-        System.out.println(productBasketN1.findProductForName("Яблоко"));
-
-        //Добавление товара в заполненную корзину
-        System.out.println("\n<<Добавление товара в заполненную корзину>>");
-        productBasketN1.addProdukt(
-                new Product("Яблоко", 50)
-        );
-        productBasketN1.addProdukt(
-                new Product("Хлеб", 25)
-        );
-        productBasketN1.addProdukt(
-                new Product("Молоко", 120)
-        );
-        productBasketN1.addProdukt(
-                new Product("Колбаса", 250)
-        );
-        productBasketN1.addProdukt(
-                new Product("Леденец", 13)
-        );
-        productBasketN1.addProdukt(
-                new Product("Леденец2", 13)
-        );
     }
 }
