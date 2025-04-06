@@ -1,6 +1,8 @@
 package org.skypro.skyshop.product.specialProducts;
 
+import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.product.productService.Searchable;
 
 import java.util.Objects;
 
@@ -9,8 +11,8 @@ public class DiscountedProduct extends Product {
     private double discountPercentage;
     private double basePrice;
 
-    public DiscountedProduct(String productName, int discountPercentage, int basePrice) {
-        super(productName);
+    public DiscountedProduct(String productName, int discountPercentage, int basePrice, Article article) {
+        super(productName, article);
         this.discountPercentage = Math.abs(discountPercentage);
         this.basePrice = Math.abs(basePrice);
     }

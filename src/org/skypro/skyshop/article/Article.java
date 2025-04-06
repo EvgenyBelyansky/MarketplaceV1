@@ -1,34 +1,29 @@
 package org.skypro.skyshop.article;
 
-import org.skypro.skyshop.productService.Searchable;
+import org.skypro.skyshop.product.productService.Searchable;
 
 public class Article implements Searchable {
-    private final String articleName;
+    private String articleName;
 
-    private final String articleBody;
+    private String articleDescription;
 
-    public Article(String articleName, String articleBody) {
+    public Article(String articleName, String articleDescription) {
         this.articleName = articleName;
-        this.articleBody = articleBody;
+        this.articleDescription = articleDescription;
     }
 
     @Override
-    public String searchTerm(String searchableText) {
-        return searchableText;
+    public String searchTerm() {
+        return articleName + '\n' + articleDescription;
     }
 
     @Override
     public String getTypeContent() {
-        return "";
-    }
-
-    @Override
-    public String getNameContent() {
-        return "";
+        return "ARTICLE";
     }
 
     @Override
     public String toString() {
-        return  articleName + '\n' + articleBody;
+        return '\n' + articleName + '\n' + articleDescription;
     }
 }

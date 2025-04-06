@@ -1,6 +1,6 @@
 package org.skypro.skyshop.product;
 
-import org.skypro.skyshop.productService.Searchable;
+import org.skypro.skyshop.article.Article;
 
 import java.util.Objects;
 
@@ -8,8 +8,8 @@ public class SimpleProduct extends Product {
 
     private int price;
 
-    public SimpleProduct(String productName, int price) {
-        super(productName);
+    public SimpleProduct(String productName, int price, Article article) {
+        super(productName, article);
         this.price = price;
     }
 
