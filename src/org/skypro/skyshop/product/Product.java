@@ -1,6 +1,8 @@
 package org.skypro.skyshop.product;
 
 import org.skypro.skyshop.article.Article;
+import org.skypro.skyshop.exceptions.ArticleIsNullException;
+import org.skypro.skyshop.exceptions.ProductNameIsEmptyException;
 import org.skypro.skyshop.product.productService.Searchable;
 
 import java.util.Objects;
@@ -13,8 +15,23 @@ public abstract class Product implements Searchable {
 
 
     public Product(String productName, Article article) {
+        validProductName(productName);
+        validArticle(article);
+
         this.productName = productName;
         this.article = article;
+    }
+
+    private void validProductName(String prodName) {
+        if (prodName == null || prodName.isBlank()) {
+            throw new ProductNameIsEmptyException();
+        }
+    }
+
+    private void validArticle(Article art) {
+        if (art == null) {
+            throw new ArticleIsNullException(productName);
+        }
     }
 
     public String getProductName() {

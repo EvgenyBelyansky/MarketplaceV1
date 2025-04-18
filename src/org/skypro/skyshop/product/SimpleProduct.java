@@ -10,8 +10,18 @@ public class SimpleProduct extends Product {
 
     public SimpleProduct(String productName, int price, Article article) {
         super(productName, article);
+
+        validPrice(price);
+
         this.price = price;
     }
+
+    private void validPrice(int price) {
+        if (0 >= price) {
+            throw new IllegalArgumentException("Цена не может быть меньше или равна НУЛЮ!!");
+        }
+    }
+
 
     @Override
     public double getPrice() {

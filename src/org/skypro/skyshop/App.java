@@ -2,6 +2,8 @@ package org.skypro.skyshop;
 
 import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.basket.ProductBasket;
+import org.skypro.skyshop.exceptions.BestResultNotFound;
+import org.skypro.skyshop.exceptions.ProductNameIsEmptyException;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.specialProducts.DiscountedProduct;
 import org.skypro.skyshop.product.SimpleProduct;
@@ -39,17 +41,27 @@ public class App {
                 appleArticle
         );
         Product bread = new DiscountedProduct(
-                "Хлеб", 25, 50,
+                "Яблочное ябл", 25, 50,
                 breadArticle
         );
-        Product milk = new SimpleProduct(
-                "Молоко", 120,
-                milkArticle
-        );
-        Product sausage = new SimpleProduct(
-                "Колбаса", 250,
-                sausageArticle
-        );
+        Product milk = null;
+        try {
+            milk = new SimpleProduct(
+                    "Молоко", 120,
+                    milkArticle
+            );
+        } catch (ProductNameIsEmptyException e) {
+            e.printStackTrace();
+        }
+        Product sausage = null;
+        try {
+            sausage = new SimpleProduct(
+                    "Колбаса", 250,
+                    sausageArticle
+            );
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
         Product lollipop = new DiscountedProduct(
                 "Леденец", 13, 35,
                 lollipopArticle
@@ -65,8 +77,14 @@ public class App {
         productBasketN1.addProdukt(lollipop);
 
         //Распечатка товаров в корзине
+        System.out.println("---------------------------------");
         System.out.println("\n<<Распечатка всех товаров в корзине>>");
-        productBasketN1.printAllProductsInBasket();
+        try {
+            productBasketN1.printAllProductsInBasket();
+        } catch (NullPointerException e) {
+            System.out.println("Один из продуктов не создан, проверь корзину!!" + Arrays.toString(e.getStackTrace()));
+        }
+        System.out.println("---------------------------------");
 
 
         SearchEngine newSearch = new SearchEngine(10);
@@ -79,8 +97,35 @@ public class App {
         newSearch.add(milkArticle);
         newSearch.add(breadArticle);
         newSearch.add(lollipopArticle);
+        System.out.println(newSearch.getSearchables().length);
+        System.out.println(newSearch.getSearchables()[0].toString());
+        System.out.println(newSearch.getSearchables()[1].toString());
+        System.out.println(newSearch.getSearchables()[2].toString());
 
-        System.out.println(Arrays.toString(newSearch.search("Леде")));
+        System.out.println("---------------------------------");
+        try {
+            System.out.println(Arrays.toString(newSearch.search("колб")));
+        } catch (NullPointerException e) {
+            System.out.println("Один из продуктов не создан, проверь корзину!!" + Arrays.toString(e.getStackTrace()));
+        }
+        System.out.println("---------------------------------");
+
+        System.out.println();
+        System.out.println("Метод поиска лучшего варианта(объект существует)");
+        System.out.println("---------------------------------");
+        System.out.println(newSearch.validBestMatch("Яблок"));
+        System.out.println("---------------------------------");
+
+
+        System.out.println();
+        System.out.println("Метод поиска лучшего варианта(объект не существует)");
+        System.out.println("---------------------------------");
+        try {
+            System.out.println(newSearch.validBestMatch("GHBKEHF"));
+        } catch (BestResultNotFound e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("---------------------------------");
 
 
     }

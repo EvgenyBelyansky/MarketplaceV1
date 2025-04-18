@@ -1,9 +1,10 @@
-package org.skypro.skyshop.basket;
+package org.skypro.skyshop.exceptions;
 
 import org.skypro.skyshop.product.Product;
 
-public class ProductBasketIsFullExeption extends RuntimeException{
-    public ProductBasketIsFullExeption(Product product) {
+public class ProductBasketIsFullException extends RuntimeException{
+
+    public ProductBasketIsFullException(Product product) {
         super(String.format("Корзина заполнена! Невозможно добавить продукт %s.", product.getProductName()));
     }
 }

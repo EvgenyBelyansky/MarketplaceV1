@@ -1,5 +1,6 @@
 package org.skypro.skyshop.basket;
 
+import org.skypro.skyshop.exceptions.ProductBasketIsFullException;
 import org.skypro.skyshop.product.Product;
 
 import java.util.Arrays;
@@ -17,7 +18,7 @@ public class ProductBasket {
 
     public void addProdukt(Product product) {
         if (quantityProductsInBasket >= productBasket.length) {
-            throw new ProductBasketIsFullExeption(product);
+            throw new ProductBasketIsFullException(product);
         }
         productBasket[quantityProductsInBasket++] = product;
     }
