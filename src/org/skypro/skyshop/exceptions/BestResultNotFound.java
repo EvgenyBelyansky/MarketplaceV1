@@ -1,7 +1,7 @@
 package org.skypro.skyshop.exceptions;
 
 public class BestResultNotFound extends RuntimeException {
-    public BestResultNotFound() {
-        super("Для поискового запроса не нашлось подходящей статьи.");
+    public BestResultNotFound(String searchText) {
+        super("Для поискового запроса |%s| не нашлось подходящей статьи.".formatted(searchText));
     }
 }

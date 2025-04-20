@@ -53,7 +53,7 @@ public class SearchEngine {
         }
 
         if (bestMatch == null) {
-            throw new BestResultNotFound();
+            throw new BestResultNotFound(search);
         }
 
         return bestMatch;
@@ -80,9 +80,7 @@ public class SearchEngine {
                 '}';
     }
 
-    public Searchable[] getSearchables() {
-        return searchables;
-    }
+
 
     public int getCount() {
         return count;

@@ -38,7 +38,7 @@ public class ProductBasket {
         }
 
         for (int i = 0; i < quantityProductsInBasket; i++) {
-            System.out.println(productBasket[i].toString());
+            System.out.println(productBasket[i]);
 //
         }
         System.out.printf("\nИтого: <%s>%n", summingBasketPrice());

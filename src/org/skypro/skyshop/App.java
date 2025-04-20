@@ -92,10 +92,7 @@ public class App {
         newSearch.add(milkArticle);
         newSearch.add(breadArticle);
         newSearch.add(lollipopArticle);
-        System.out.println(newSearch.getSearchables().length);
-        System.out.println(newSearch.getSearchables()[0].toString());
-        System.out.println(newSearch.getSearchables()[1].toString());
-        System.out.println(newSearch.getSearchables()[2].toString());
+
 
         System.out.println("---------------------------------");
         try {
