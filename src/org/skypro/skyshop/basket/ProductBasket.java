@@ -1,5 +1,6 @@
 package org.skypro.skyshop.basket;
 
+import org.skypro.skyshop.exceptions.ProductBasketIsFullException;
 import org.skypro.skyshop.product.Product;
 
 import java.util.Arrays;
@@ -17,7 +18,7 @@ public class ProductBasket {
 
     public void addProdukt(Product product) {
         if (quantityProductsInBasket >= productBasket.length) {
-            throw new ProductBasketIsFullExeption(product);
+            throw new ProductBasketIsFullException(product);
         }
         productBasket[quantityProductsInBasket++] = product;
     }
@@ -37,10 +38,14 @@ public class ProductBasket {
         }
 
         for (int i = 0; i < quantityProductsInBasket; i++) {
-            System.out.printf("<%s>: <%s>%n",
-                    productBasket[i].getProductName(), productBasket[i].getPrice());
+            System.out.println(productBasket[i]);
+//
         }
         System.out.printf("\nИтого: <%s>%n", summingBasketPrice());
+        System.out.printf("Специальных товаров: <%s>%n",
+                Arrays.stream(productBasket)
+                        .filter(Product::isSpecial)
+                        .count());
     }
 
     public void clearBasket() {
