@@ -10,16 +10,12 @@ import java.util.Objects;
 public abstract class Product implements Searchable {
 
     private final String productName;
-    
-    private final Article article;
 
 
-    public Product(String productName, Article article) {
+    public Product(String productName) {
         validProductName(productName);
-        validArticle(article);
 
         this.productName = productName;
-        this.article = article;
     }
 
     private void validProductName(String prodName) {

@@ -11,8 +11,8 @@ public class DiscountedProduct extends Product {
     private double discountPercentage;
     private double basePrice;
 
-    public DiscountedProduct(String productName, int discountPercentage, int basePrice, Article article) {
-        super(productName, article);
+    public DiscountedProduct(String productName, int discountPercentage, int basePrice) {
+        super(productName);
 
         validDiscountPercentage(discountPercentage);
         validBasePrice(basePrice);

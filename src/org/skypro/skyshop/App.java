@@ -37,18 +37,15 @@ public class App {
 
 
         Product apple = new FixPriceProduct(
-                "Яблоко",
-                appleArticle
+                "Яблоко"
         );
         Product bread = new DiscountedProduct(
-                "Яблочное ябл", 25, 50,
-                breadArticle
+                "Яблочное ябл", 25, 50
         );
         Product milk = null;
         try {
             milk = new SimpleProduct(
-                    "Молоко", 120,
-                    milkArticle
+                    "Молоко", 120
             );
         } catch (ProductNameIsEmptyException e) {
             e.printStackTrace();
@@ -56,15 +53,13 @@ public class App {
         Product sausage = null;
         try {
             sausage = new SimpleProduct(
-                    "Колбаса", 250,
-                    sausageArticle
+                    "Колбаса", 250
             );
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
         Product lollipop = new DiscountedProduct(
-                "Леденец", 13, 35,
-                lollipopArticle
+                "Леденец", 13, 35
         );
 
 

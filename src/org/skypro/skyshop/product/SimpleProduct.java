@@ -8,8 +8,8 @@ public class SimpleProduct extends Product {
 
     private int price;
 
-    public SimpleProduct(String productName, int price, Article article) {
-        super(productName, article);
+    public SimpleProduct(String productName, int price) {
+        super(productName);
 
         validPrice(price);
 
