@@ -82,7 +82,7 @@ public class App {
         System.out.println("---------------------------------");
 
 
-        SearchEngine newSearch = new SearchEngine(10);
+        SearchEngine newSearch = new SearchEngine();
         newSearch.add(apple);
         newSearch.add(appleArticle);
         newSearch.add(milk);
@@ -96,7 +96,7 @@ public class App {
 
         System.out.println("---------------------------------");
         try {
-            System.out.println(Arrays.toString(newSearch.search("колб")));
+            System.out.println(newSearch.search("колб"));
         } catch (NullPointerException e) {
             System.out.println("Один из продуктов не создан, проверь корзину!!" + Arrays.toString(e.getStackTrace()));
         }
@@ -117,6 +117,21 @@ public class App {
         } catch (BestResultNotFound e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("---------------------------------");
+        System.out.println("\n\n");
+
+
+        System.out.println("---------------------------------");
+        System.out.println("Удаленные продукты:");
+        System.out.println(productBasketN1.removeProduct("Яблоко"));
+        System.out.println("---------------------------------");
+        System.out.println();
+
+        System.out.println("---------------------------------");
+        productBasketN1.printAllProductsInBasket();
+
+        System.out.println("---------------------------------");
+        System.out.println(productBasketN1.removeProduct("Яблоко"));
         System.out.println("---------------------------------");
 
 

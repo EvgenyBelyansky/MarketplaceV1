@@ -2,32 +2,28 @@ package org.skypro.skyshop.product.productService;
 
 import org.skypro.skyshop.exceptions.BestResultNotFound;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchEngine {
 
-    private Searchable[] searchables;
-    private int count;
+    private List<Searchable> searchables;
 
 
-    public SearchEngine(int count) {
-        this.searchables = new Searchable[count];
+    public SearchEngine() {
+        this.searchables = new ArrayList<>();
     }
 
     public void add(Searchable searchable) {
-        searchables[count++] = searchable;
+        searchables.add(searchable);
     }
 
-    public Searchable[] search(String searchQuery) {
-        Searchable[] searc1 = new Searchable[5];
-        int newCount = 0;
-        for (int i = 0; i < count; i++) {
-            if (searchables[i].searchTerm().toUpperCase().contains(searchQuery.toUpperCase())) {
-                searc1[newCount] = searchables[i];
-                newCount++;
-            }
-            if (searc1.length < 5) {
-                break;
+    public List<Searchable> search(String searchQuery) {
+        List<Searchable> searc1 = new ArrayList<>();
+
+        for (int i = 0; i < searchables.size(); i++) {
+            if (searchables.get(i).searchTerm().toUpperCase().contains(searchQuery.toUpperCase())) {
+                searc1.add(searchables.get(i));
             }
 
         }
@@ -40,7 +36,7 @@ public class SearchEngine {
         int maxCount = 0;
 
         for (Searchable searchable : searchables) {
-            if(searchable == null) {
+            if (searchable == null) {
                 break;
             }
             String text = searchable.searchTerm();
@@ -71,18 +67,10 @@ public class SearchEngine {
         return count;
     }
 
-
-
     @Override
     public String toString() {
         return "SearchEngine{" +
-                "searchables=" + Arrays.toString(searchables) +
+                "searchables=" + searchables +
                 '}';
-    }
-
-
-
-    public int getCount() {
-        return count;
     }
 }
