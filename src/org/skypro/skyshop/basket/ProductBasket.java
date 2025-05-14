@@ -18,7 +18,7 @@ public class ProductBasket {
         productBasket.add(product);
     }
 
-    public List removeProduct(String removedProductName) {
+    public List<Product> removeProduct(String removedProductName) {
         List<Product> removedProducts = new ArrayList<>();
 
         for (int i = 0; i < productBasket.size(); i++) {
