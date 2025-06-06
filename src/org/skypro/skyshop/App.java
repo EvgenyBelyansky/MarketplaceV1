@@ -1,7 +1,16 @@
 package org.skypro.skyshop;
 
+import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.basket.ProductBasket;
+import org.skypro.skyshop.exceptions.BestResultNotFound;
+import org.skypro.skyshop.exceptions.ProductNameIsEmptyException;
 import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.product.specialProducts.DiscountedProduct;
+import org.skypro.skyshop.product.SimpleProduct;
+import org.skypro.skyshop.product.specialProducts.FixPriceProduct;
+import org.skypro.skyshop.product.productService.SearchEngine;
+
+import java.util.Arrays;
 
 
 public class App {
@@ -9,73 +18,122 @@ public class App {
 
         ProductBasket productBasketN1 = new ProductBasket();
 
-        productBasketN1.addProdukt(
-                new Product("Яблоко", 50)
+
+        Article appleArticle = new Article(
+                "О Яблоке", "Оно зеленое или красное, кислое или сладкое"
         );
-        productBasketN1.addProdukt(
-                new Product("Хлеб", 25)
+        Article breadArticle = new Article(
+                "Что-то про Хлеб", "Бывает черрный и белый"
         );
-        productBasketN1.addProdukt(
-                new Product("Молоко", 120)
+        Article milkArticle = new Article(
+                "Про молоко", "Жидкое и белое......."
         );
-        productBasketN1.addProdukt(
-                new Product("Колбаса", 250)
+        Article sausageArticle = new Article(
+                "Про Колбасу", "Из мяса, возможно"
         );
-        productBasketN1.addProdukt(
-                new Product("Леденец", 13)
+        Article lollipopArticle = new Article(
+                "Про Леденец", "На палке и нет"
         );
 
-        //Вычисление стоимости товаров в корзине
-        System.out.println("\n<<Вычисление стоимости товаров в корзине>>");
-        System.out.println("Сумма товаров в корзине = " + productBasketN1.summingBasketPrice());
 
-        //Распечатка всех товаров в корзине
+        Product apple = new FixPriceProduct(
+                "Яблоко"
+        );
+        Product bread = new DiscountedProduct(
+                "Яблочное ябл", 25, 50
+        );
+        Product milk = null;
+        try {
+            milk = new SimpleProduct(
+                    "Молоко", 120
+            );
+        } catch (ProductNameIsEmptyException e) {
+            e.printStackTrace();
+        }
+        Product sausage = null;
+        try {
+            sausage = new SimpleProduct(
+                    "Колбаса", 250
+            );
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        Product lollipop = new DiscountedProduct(
+                "Леденец", 13, 35
+        );
+
+
+        //Добавление товаров разных типов в корзину
+        System.out.println("\n<<Добавление товаров разных типов в корзину>>");
+        productBasketN1.addProdukt(apple);
+        productBasketN1.addProdukt(bread);
+        productBasketN1.addProdukt(milk);
+        productBasketN1.addProdukt(sausage);
+        productBasketN1.addProdukt(lollipop);
+
+        //Распечатка товаров в корзине
+        System.out.println("---------------------------------");
         System.out.println("\n<<Распечатка всех товаров в корзине>>");
+        try {
+            productBasketN1.printAllProductsInBasket();
+        } catch (NullPointerException e) {
+            System.out.println("Один из продуктов не создан, проверь корзину!!" + Arrays.toString(e.getStackTrace()));
+        }
+        System.out.println("---------------------------------");
+
+
+        SearchEngine newSearch = new SearchEngine();
+        newSearch.add(apple);
+        newSearch.add(appleArticle);
+        newSearch.add(milk);
+        newSearch.add(sausage);
+        newSearch.add(lollipop);
+        newSearch.add(sausageArticle);
+        newSearch.add(milkArticle);
+        newSearch.add(breadArticle);
+        newSearch.add(lollipopArticle);
+
+
+        System.out.println("---------------------------------");
+        try {
+            System.out.println(newSearch.search("колб"));
+        } catch (NullPointerException e) {
+            System.out.println("Один из продуктов не создан, проверь корзину!!" + Arrays.toString(e.getStackTrace()));
+        }
+        System.out.println("---------------------------------");
+
+        System.out.println();
+        System.out.println("Метод поиска лучшего варианта(объект существует)");
+        System.out.println("---------------------------------");
+        System.out.println(newSearch.validBestMatch("Яблок"));
+        System.out.println("---------------------------------");
+
+
+        System.out.println();
+        System.out.println("Метод поиска лучшего варианта(объект не существует)");
+        System.out.println("---------------------------------");
+        try {
+            System.out.println(newSearch.validBestMatch("GHBKEHF"));
+        } catch (BestResultNotFound e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("---------------------------------");
+        System.out.println("\n\n");
+
+
+        System.out.println("---------------------------------");
+        System.out.println("Удаленные продукты:");
+        System.out.println(productBasketN1.removeProduct("Яблоко"));
+        System.out.println("---------------------------------");
+        System.out.println();
+
+        System.out.println("---------------------------------");
         productBasketN1.printAllProductsInBasket();
 
-        //Поиск по названию, продукта, который есть в корзине
-        System.out.println("\n<<Поиск по названию, продукта, который есть в корзине>>");
-        System.out.println(productBasketN1.findProductForName("Яблоко"));
+        System.out.println("---------------------------------");
+        System.out.println(productBasketN1.removeProduct("Яблоко"));
+        System.out.println("---------------------------------");
 
-        //Поиск по названию, продукта, которого нет в корзине
-        System.out.println("\n<<Поиск по названию, продукта, которого нет в корзине>>");
-        System.out.println(productBasketN1.findProductForName("Батон"));
 
-        //Очистка корзины
-        System.out.println("\n<<Очистка корзины>>");
-        productBasketN1.clearBasket();
-
-        //Распечатка пустой корзины
-        System.out.println("\n<<Распечатка пустой корзины>>");
-        productBasketN1.printAllProductsInBasket();
-
-        //Вычисление суммы пустой корзины
-        System.out.println("\n<<Вычисление суммы пустой корзины>>");
-        System.out.println(productBasketN1.summingBasketPrice());
-
-        //Поиск продукта в пустой корзине по названию
-        System.out.println("\n<<Поиск продукта в пустой корзине по названию>>");
-        System.out.println(productBasketN1.findProductForName("Яблоко"));
-
-        //Добавление товара в заполненную корзину
-        System.out.println("\n<<Добавление товара в заполненную корзину>>");
-        productBasketN1.addProdukt(
-                new Product("Яблоко", 50)
-        );
-        productBasketN1.addProdukt(
-                new Product("Хлеб", 25)
-        );
-        productBasketN1.addProdukt(
-                new Product("Молоко", 120)
-        );
-        productBasketN1.addProdukt(
-                new Product("Колбаса", 250)
-        );
-        productBasketN1.addProdukt(
-                new Product("Леденец", 13)
-        );
-        productBasketN1.addProdukt(
-                new Product("Леденец2", 13)
-        );
     }
 }
