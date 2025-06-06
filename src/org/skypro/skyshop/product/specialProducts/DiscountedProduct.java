@@ -1,6 +1,5 @@
 package org.skypro.skyshop.product.specialProducts;
 
-import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.product.Product;
 
 
@@ -58,7 +57,7 @@ public class DiscountedProduct extends Product {
 
     @Override
     public String toString() {
-        return String.format("<%s>: <%s>, (%s%% скидка) ", getProductName(), getPrice(), discountPercentage);
+        return String.format("<%s>: <%s>, (%s%% скидка) ", getName(), getPrice(), discountPercentage);
     }
 
     @Override

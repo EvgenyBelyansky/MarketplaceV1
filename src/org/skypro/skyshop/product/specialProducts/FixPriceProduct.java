@@ -17,7 +17,7 @@ public class FixPriceProduct extends Product{
 
     @Override
     public String toString() {
-        return String.format("<%s>: Фиксированная цена <%s> рублей", getProductName(), getPrice());
+        return String.format("<%s>: Фиксированная цена <%s> рублей", getName(), getPrice());
     }
 
     @Override

@@ -2,8 +2,11 @@ package org.skypro.skyshop.product.productService;
 
 import org.skypro.skyshop.exceptions.BestResultNotFound;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static java.util.function.Function.identity;
 
 public class SearchEngine {
 
@@ -18,14 +21,13 @@ public class SearchEngine {
         searchables.add(searchable);
     }
 
-    public List<Searchable> search(String searchQuery) {
-        List<Searchable> searc1 = new ArrayList<>();
+    public Map<String,Searchable> search(String searchQuery) {
+        Map<String,Searchable> searc1 = new TreeMap<>();
 
-        for (int i = 0; i < searchables.size(); i++) {
-            if (searchables.get(i).searchTerm().toUpperCase().contains(searchQuery.toUpperCase())) {
-                searc1.add(searchables.get(i));
+        for (Searchable searchable : searchables) {
+            if (searchable.searchTerm().toUpperCase().contains(searchQuery.toUpperCase())) {
+                searc1.put(searchable.getName() ,searchable);
             }
-
         }
         return searc1;
     }
@@ -65,12 +67,5 @@ public class SearchEngine {
         }
 
         return count;
-    }
-
-    @Override
-    public String toString() {
-        return "SearchEngine{" +
-                "searchables=" + searchables +
-                '}';
     }
 }

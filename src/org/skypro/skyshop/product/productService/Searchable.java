@@ -6,9 +6,12 @@ public interface Searchable {
 
     String getTypeContent();
 
+    String getName();
+
 
     default String getStringRepresentation() {
         return String.format("Имя %s - тип %s", searchTerm(), getTypeContent());
     }
+
 
 }

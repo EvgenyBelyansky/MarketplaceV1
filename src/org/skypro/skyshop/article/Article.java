@@ -24,6 +24,11 @@ public class Article implements Searchable {
 
     @Override
     public String toString() {
-        return '\n' + articleName + '\n' + articleDescription;
+        return articleName + '\n' + articleDescription;
+    }
+
+    @Override
+    public String getName() {
+        return articleName;
     }
 }
