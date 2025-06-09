@@ -39,8 +39,8 @@ public class App {
         Product apple = new FixPriceProduct(
                 "Яблоко"
         );
-        Product bread = new DiscountedProduct(
-                "Яблочное ябл", 25, 50
+        Product bread = new SimpleProduct(
+                "Яблоко", 25
         );
         Product milk = null;
         try {
@@ -84,7 +84,7 @@ public class App {
 
         SearchEngine newSearch = new SearchEngine();
         newSearch.add(apple);
-        newSearch.add(appleArticle);
+        newSearch.add(apple);
         newSearch.add(milk);
         newSearch.add(sausage);
         newSearch.add(lollipop);

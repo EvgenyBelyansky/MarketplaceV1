@@ -8,25 +8,25 @@ import java.util.stream.Collectors;
 
 import static java.util.function.Function.identity;
 
-public class SearchEngine {
+public class SearchEngine implements Comparator<Searchable>{
 
-    private List<Searchable> searchables;
+    private Set<Searchable> searchables;
 
 
     public SearchEngine() {
-        this.searchables = new ArrayList<>();
+        this.searchables = new HashSet<>();
     }
 
     public void add(Searchable searchable) {
         searchables.add(searchable);
     }
 
-    public Map<String,Searchable> search(String searchQuery) {
-        Map<String,Searchable> searc1 = new TreeMap<>();
+    public Set<Searchable> search(String searchQuery) {
+        Set<Searchable> searc1 = new HashSet<>();
 
         for (Searchable searchable : searchables) {
             if (searchable.searchTerm().toUpperCase().contains(searchQuery.toUpperCase())) {
-                searc1.put(searchable.getName() ,searchable);
+                searc1.add(searchable);
             }
         }
         return searc1;
@@ -68,4 +68,15 @@ public class SearchEngine {
 
         return count;
     }
+
+    @Override
+    public int compare(Searchable s1, Searchable s2) {
+        final int lengthCompare = s1.getName().length() - s2.getName().length();
+
+        if (lengthCompare == 0) {
+            return s1.getName().compareTo(s2.getName());
+        }
+        return lengthCompare;
+    }
+
 }
