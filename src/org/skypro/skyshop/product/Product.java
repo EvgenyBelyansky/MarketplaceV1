@@ -7,7 +7,7 @@ import org.skypro.skyshop.product.productService.Searchable;
 
 import java.util.Objects;
 
-public abstract class Product implements Searchable {
+public abstract class Product implements Searchable, Comparable<Searchable> {
 
     private final String productName;
 
@@ -66,4 +66,17 @@ public abstract class Product implements Searchable {
         return "PRODUCT";
     }
 
+    @Override
+    public int compareTo(Searchable o) {
+
+        int lengthCompare = Integer.compare(
+                o.getName().length(),
+                this.getName().length()
+        );
+
+        if (lengthCompare == 0) {
+            return this.getName().compareTo(o.getName());
+        }
+        return lengthCompare;
+    }
 }

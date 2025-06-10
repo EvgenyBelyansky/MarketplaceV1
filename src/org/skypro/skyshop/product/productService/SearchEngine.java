@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import static java.util.function.Function.identity;
 
-public class SearchEngine implements Comparator<Searchable>{
+public class SearchEngine {
 
     private Set<Searchable> searchables;
 
@@ -22,7 +22,7 @@ public class SearchEngine implements Comparator<Searchable>{
     }
 
     public Set<Searchable> search(String searchQuery) {
-        Set<Searchable> searc1 = new HashSet<>();
+        Set<Searchable> searc1 = new TreeSet<>();
 
         for (Searchable searchable : searchables) {
             if (searchable.searchTerm().toUpperCase().contains(searchQuery.toUpperCase())) {
@@ -31,6 +31,7 @@ public class SearchEngine implements Comparator<Searchable>{
         }
         return searc1;
     }
+
 
     public Searchable validBestMatch(String search) {
 
@@ -68,15 +69,4 @@ public class SearchEngine implements Comparator<Searchable>{
 
         return count;
     }
-
-    @Override
-    public int compare(Searchable s1, Searchable s2) {
-        final int lengthCompare = s1.getName().length() - s2.getName().length();
-
-        if (lengthCompare == 0) {
-            return s1.getName().compareTo(s2.getName());
-        }
-        return lengthCompare;
-    }
-
 }

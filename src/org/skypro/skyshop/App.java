@@ -10,7 +10,10 @@ import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.product.specialProducts.FixPriceProduct;
 import org.skypro.skyshop.product.productService.SearchEngine;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 
 public class App {
@@ -133,7 +136,6 @@ public class App {
         System.out.println("---------------------------------");
         System.out.println(productBasketN1.removeProduct("Яблоко"));
         System.out.println("---------------------------------");
-
 
     }
 }
