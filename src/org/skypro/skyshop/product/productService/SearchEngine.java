@@ -24,11 +24,16 @@ public class SearchEngine {
     public Set<Searchable> search(String searchQuery) {
         Set<Searchable> searc1 = new TreeSet<>();
 
-        for (Searchable searchable : searchables) {
-            if (searchable.searchTerm().toUpperCase().contains(searchQuery.toUpperCase())) {
-                searc1.add(searchable);
-            }
-        }
+
+        searc1.stream()
+                .filter(s -> s.getName().toUpperCase().contains(searchQuery.toUpperCase()))
+                .collect(Collectors.toCollection(TreeSet::new));
+
+//        for (Searchable searchable : searchables) {
+//            if (searchable.searchTerm().toUpperCase().contains(searchQuery.toUpperCase())) {
+//                searc1.add(searchable);
+//            }
+//        }
         return searc1;
     }
 
